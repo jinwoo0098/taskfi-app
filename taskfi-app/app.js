@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 1. Pi SDK 초기화 (오픈 메인넷 통신을 위해 sandbox: false 유지)
   try {
-    Pi.init({ version: "2.0", sandbox: false });
+    Pi.init({ version: "2.0", sandbox: true });
     
     usernameElement.textContent = "여기를 터치하여 로그인";
     usernameElement.style.color = "#FFD700"; 
@@ -111,4 +111,5 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
 });
