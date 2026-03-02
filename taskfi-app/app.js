@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 2. SDK 초기화 (이제 sandbox는 무조건 false로 고정합니다)
   try {
-    Pi.init({ version: "2.0", sandbox: false });
+    Pi.init({ version: "2.0", sandbox: true });
     usernameElement.innerHTML = `[접속주소]<br><span style="font-size:12px; color:#aaa;">${currentUrl}</span><br><br>여기를 터치하여 로그인`;
     usernameElement.style.color = "#FFD700"; 
     usernameElement.style.cursor = "pointer";
@@ -110,5 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
 
 
