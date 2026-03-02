@@ -1,0 +1,358 @@
+:root {
+  --bg: #050712;
+  --bg-alt: #070918;
+  --surface: #111426;
+  --surface-soft: #181b33;
+  --accent: #ffb347;
+  --accent-strong: #ff6b81;
+  --accent-soft: rgba(255, 179, 71, 0.16);
+  --text: #f5f6fa;
+  --text-subtle: #a4b0be;
+  --border-soft: rgba(255, 255, 255, 0.05);
+  --radius-lg: 20px;
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.75);
+  --transition-fast: 0.18s ease-out;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top, #26294f 0, transparent 55%),
+    radial-gradient(circle at bottom, #181a33 0, transparent 55%),
+    radial-gradient(circle at center, #050712 0, #020309 70%);
+  color: var(--text);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.app {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px 16px 24px;
+  row-gap: 14px;
+}
+
+/* 상단 헤더 */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at top left, rgba(255, 179, 71, 0.22), transparent 60%),
+    radial-gradient(circle at bottom right, rgba(0, 151, 230, 0.25), transparent 60%),
+    linear-gradient(135deg, rgba(18, 22, 49, 0.96), rgba(6, 7, 22, 0.98));
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--border-soft);
+  backdrop-filter: blur(22px);
+  gap: 12px;
+}
+
+.logo-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.logo-text {
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.logo-text span {
+  color: var(--accent);
+  text-shadow: 0 0 10px rgba(255, 179, 71, 0.7);
+}
+
+.logo-tag {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--text-subtle);
+  opacity: 0.9;
+}
+
+.player-info {
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(5, 7, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  min-width: 130px;
+}
+
+.player-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+  opacity: 0.9;
+}
+
+.player-name {
+  margin-top: 3px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* 메인 영역 */
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 6px 2px 4px;
+}
+
+.card {
+  border-radius: calc(var(--radius-lg) + 2px);
+  background:
+    radial-gradient(circle at top left, rgba(255, 179, 71, 0.12), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(0, 151, 230, 0.14), transparent 55%),
+    var(--surface);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  padding: 16px 16px 15px;
+}
+
+.quest-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.quest-card::before {
+  content: "Quest";
+  position: absolute;
+  top: -8px;
+  right: 8px;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.12);
+}
+
+.swap-card {
+  background:
+    radial-gradient(circle at top right, rgba(255, 107, 129, 0.18), transparent 55%),
+    radial-gradient(circle at bottom left, rgba(0, 151, 230, 0.18), transparent 55%),
+    var(--surface-soft);
+}
+
+.card-header {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.card-subtitle {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-subtle);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.reward-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(3, 5, 18, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.reward-label {
+  font-size: 0.82rem;
+  color: var(--text-subtle);
+}
+
+.reward-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.card-description {
+  margin: 2px 0 0;
+  font-size: 0.86rem;
+  color: var(--text-subtle);
+  line-height: 1.5;
+}
+
+.highlight {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* 스왑 영역 */
+.swap-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.token-box {
+  flex: 1;
+  padding: 10px 10px 9px;
+  border-radius: 14px;
+  background: rgba(7, 9, 25, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.token-label {
+  font-size: 0.72rem;
+  color: var(--text-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.token-name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.swap-arrow {
+  align-self: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--accent);
+  background: radial-gradient(circle at 30% 20%, rgba(255, 179, 71, 0.3), transparent 60%);
+}
+
+/* 버튼 */
+.btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 13px 16px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    filter var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.btn.full-width {
+  width: 100%;
+}
+
+.primary-btn {
+  color: #050712;
+  background: linear-gradient(135deg, #ffeaa7, #ffb347, #ff6b81);
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.8),
+    0 0 16px rgba(255, 179, 71, 0.6);
+}
+
+.secondary-btn {
+  color: #050712;
+  background: linear-gradient(135deg, #a5b1ff, #70a1ff, #1e90ff);
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.8),
+    0 0 16px rgba(112, 161, 255, 0.7);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.97);
+  box-shadow: 0 7px 16px rgba(0, 0, 0, 0.85);
+  filter: brightness(0.96);
+}
+
+.btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 3px;
+}
+
+/* 푸터 */
+.app-footer {
+  padding: 2px 4px 0;
+}
+
+.footer-text {
+  margin: 0;
+  font-size: 0.74rem;
+  color: var(--text-subtle);
+  text-align: center;
+}
+
+/* 반응형 */
+@media (max-width: 400px) {
+  .app {
+    padding-inline: 12px;
+  }
+
+  .app-header {
+    padding-inline: 14px;
+  }
+
+  .card {
+    padding-inline: 14px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .player-name {
+    font-size: 0.86rem;
+  }
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>TaskFi - 모바일 퀘스트</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  <script src="app.js?v=7" defer></script>
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="logo-wrap">
+        <div class="logo-text">Task<span>Fi</span></div>
+        <div class="logo-tag">Mobile Quest</div>
+      </div>
+      <div class="player-info">
+        <div class="player-label">플레이어</div>
+        <div id="username" class="player-name">로그인 필요</div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <!-- 퀘스트 영역 -->
+      <section class="card quest-card">
+        <header class="card-header">
+          <h2 class="card-title">데이터 라벨링 퀘스트</h2>
+          <p class="card-subtitle">오늘의 일일 미션</p>
+        </header>
+        <div class="card-body">
+          <div class="reward-row">
+            <span class="reward-label">보상</span>
+            <span class="reward-value">1 파이</span>
+          </div>
+          <p class="card-description">
+            간단한 데이터 라벨링 작업을 완료하고
+            <span class="highlight">실제 파이 보상</span>을 받아보세요.
+          </p>
+          <button class="btn primary-btn full-width" type="button">
+            작업 완료
+          </button>
+        </div>
+      </section>
+
+      <!-- 스왑 영역 -->
+      <section class="card swap-card">
+        <header class="card-header">
+          <h2 class="card-title">TaskFi DEX</h2>
+          <p class="card-subtitle">파이를 TaskFi 토큰으로 스왑</p>
+        </header>
+        <div class="card-body">
+          <div class="swap-row">
+            <div class="token-box">
+              <span class="token-label">From</span>
+              <span class="token-name">Pi</span>
+            </div>
+            <div class="swap-arrow">⇄</div>
+            <div class="token-box">
+              <span class="token-label">To</span>
+              <span class="token-name">TFI</span>
+            </div>
+          </div>
+          <button class="btn secondary-btn full-width" type="button">
+            1 Pi 스왑하기
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p class="footer-text">
+        ※ 이 화면은 UI/UX 디자인 목업이며, 실제 기능은 추후 연동됩니다.
+      </p>
+    </footer>
+  </div>
+</body>
+</html>
