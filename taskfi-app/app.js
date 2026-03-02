@@ -1,63 +1,60 @@
 // app.js
 document.addEventListener("DOMContentLoaded", () => {
   const usernameElement = document.getElementById("username");
-  const swapButton = document.querySelector(".swap-card .secondary-btn");
   
+  // 1. 화면에 현재 접속 URL 정확히 출력 (포털과 대조용)
+  const currentUrl = window.location.href;
+  console.log("Current URL:", currentUrl);
+
   let isAuthenticated = false;
 
-  // 1. Pi SDK 초기화 (오픈 메인넷 통신을 위해 sandbox: false 유지)
+  // 2. SDK 초기화 (이제 sandbox는 무조건 false로 고정합니다)
   try {
     Pi.init({ version: "2.0", sandbox: false });
-    
-    usernameElement.textContent = "여기를 터치하여 로그인";
+    usernameElement.innerHTML = `[접속주소]<br><span style="font-size:12px; color:#aaa;">${currentUrl}</span><br><br>여기를 터치하여 로그인`;
     usernameElement.style.color = "#FFD700"; 
-    usernameElement.style.textDecoration = "underline";
     usernameElement.style.cursor = "pointer";
   } catch (err) {
-    window.alert("Pi SDK 초기화 에러: " + err.message);
+    usernameElement.textContent = "초기화 실패: " + err.message;
     return;
   }
 
-  // ★ 필수 콜백 함수를 밖으로 분리 (통신 누락 방지)
   const onIncompletePaymentFound = (payment) => {
-    console.log("미완료 결제 데이터:", payment);
+    console.log("미완료 결제:", payment);
   };
 
-  // 2. 수동 로그인 버튼 로직 (async/await 적용)
   usernameElement.addEventListener("click", async () => {
     if (isAuthenticated) return;
 
-    usernameElement.textContent = "응답 대기 중...";
+    usernameElement.textContent = "인증 서버와 통신 중...";
     usernameElement.style.color = "#AAAAAA";
 
     const hangTracker = setTimeout(() => {
-      window.alert("응답 지연: 파이 브라우저가 응답하지 않습니다.\nDeveloper Portal의 App URL과 정확히 일치하는지 확인하세요.");
-      usernameElement.textContent = "여기를 터치하여 다시 로그인";
+      // 에러 메시지에 현재 URL을 포함하여 정확한 불일치 원인을 눈으로 확인합니다.
+      window.alert(
+        `응답 지연 (10초)\n\n[현재 앱 주소]\n${currentUrl}\n\n위 주소가 Developer Portal의 URL과 일치하는지 확인하세요.`
+      );
+      usernameElement.innerHTML = "통신 실패. 다시 터치하여 로그인";
       usernameElement.style.color = "#FFD700";
     }, 10000);
 
     try {
-      // ★ async/await 방식으로 인증 호출
       const authResult = await Pi.authenticate(["username", "payments"], onIncompletePaymentFound);
-      
-      clearTimeout(hangTracker); // 정상 응답 시 타이머 즉시 해제
+      clearTimeout(hangTracker); 
       
       const piUsername = authResult.user.username;
-      
       if (piUsername) {
         isAuthenticated = true;
-        usernameElement.textContent = piUsername;
-        usernameElement.style.color = "#FFFFFF";
-        usernameElement.style.textDecoration = "none";
-        usernameElement.style.cursor = "default";
+        usernameElement.textContent = "로그인 성공: " + piUsername;
+        usernameElement.style.color = "#00FF00";
       }
     } catch (error) {
-      clearTimeout(hangTracker); // 에러 발생 시 타이머 해제
-      window.alert("로그인 거부 또는 에러: " + error.message);
-      usernameElement.textContent = "여기를 터치하여 다시 로그인";
-      usernameElement.style.color = "#FFD700";
+      clearTimeout(hangTracker);
+      window.alert("인증 에러 발생: " + error.message);
+      usernameElement.textContent = "로그인 에러. 다시 시도";
     }
   });
+});
   // 3. 결제(스왑) 생성 로직
   if (swapButton) {
     swapButton.addEventListener("click", () => {
@@ -113,4 +110,5 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+
 
